@@ -1,6 +1,7 @@
 import numpy as np, os, time, random
 from core import mod_utils as utils, agent
 import gymnasium as gym
+import mo_gymnasium as mo_gym
 import torch
 import argparse
 import pickle
@@ -42,7 +43,7 @@ if __name__ == "__main__":
     selection_tracker = utils.Tracker(parameters, ['elite', 'selected', 'discarded'], '_selection.csv')
 
     # Create Env
-    env = utils.NormalizedActions(gym.make(parameters.env_name))
+    env = gym.make(parameters.env_name)
     parameters.action_dim = env.action_space.shape[0]
     parameters.state_dim = env.observation_space.shape[0]
 
@@ -50,7 +51,7 @@ if __name__ == "__main__":
     parameters.write_params(stdout=True)
 
     # Seed
-    env.seed(parameters.seed)
+    # env.seed(parameters.seed)
     torch.manual_seed(parameters.seed)
     np.random.seed(parameters.seed)
     random.seed(parameters.seed)
