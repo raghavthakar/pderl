@@ -20,14 +20,14 @@ def evaluate(agent, env, trials=1, render=False):
     for trial in range(trials):
         total_reward = 0
 
-        state = env.reset()
+        state, info = env.reset()
         done = False
         while not done:
             if render: env.render()
             action = agent.actor.select_action(np.array(state))
 
             # Simulate one step in environment
-            next_state, reward, done, info = env.step(action.flatten())
+            next_state, reward, done, truncated, info = env.step(action.flatten())
             total_reward += reward
             state = next_state
 

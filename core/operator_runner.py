@@ -28,7 +28,7 @@ class OperatorRunner:
         for trial in range(trials):
             total_reward = 0
 
-            state = self.env.reset()
+            state, info = self.env.reset()
             if trial < 3:
                 states.append(state)
             done = False
@@ -36,7 +36,7 @@ class OperatorRunner:
                 action = agent.actor.select_action(np.array(state))
 
                 # Simulate one step in environment
-                next_state, reward, done, info = self.env.step(action.flatten())
+                next_state, reward, done, truncated, info = self.env.step(action.flatten())
                 total_reward += reward
                 state = next_state
                 if trial < 3:

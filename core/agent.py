@@ -47,7 +47,7 @@ class Agent:
         total_reward = 0.0
         total_error = 0.0
 
-        state = self.env.reset()
+        state, info = self.env.reset()
         done = False
 
         while not done:
@@ -59,7 +59,7 @@ class Agent:
                 action = np.clip(action, -1.0, 1.0)
 
             # Simulate one step in environment
-            next_state, reward, done, info = self.env.step(action.flatten())
+            next_state, reward, done, truncated, info = self.env.step(action.flatten())
             total_reward += reward
 
             transition = (state, action, next_state, reward, float(done))
