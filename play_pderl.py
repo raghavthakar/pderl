@@ -3,7 +3,7 @@ from core import mod_utils as utils
 from core.ddpg import GeneticAgent
 from parameters import Parameters
 import torch
-import gym
+import gymnasium as gym
 import argparse
 
 parser = argparse.ArgumentParser()
